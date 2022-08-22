@@ -1,0 +1,122 @@
+<div class="spinner" *ngIf="spin==true">
+    Autoriser votre localisation
+</div>
+
+<nav *ngIf="spin==false" class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+        aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand" href="">My Event</a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+        </ul>
+        <div class="form-inline my-2 my-lg-0">
+            <button class="btn btn-success my-2 mr-1 my-sm-0" type="submit" [routerLink]="['/login']">Login</button>
+
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
+                [routerLink]="['/registre']">Rgistre</button>
+        </div>
+    </div>
+</nav>
+<div *ngIf="spin==false" class="mt-4">
+
+    <div class="alert alert-success" *ngIf="ajoutetat==true" role="alert">
+        Event ajouté </div>
+    <div *ngIf="idU!=null">
+        <button class="btn btn-primary mb-3 ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Add
+            Events</button>
+
+    </div>
+    <section>
+        <div class="">
+            <div class="row">
+                <div class="col-sm border pr-2">
+
+                    <p class=" text-left font-italic font-weight-bold"><i class="fa fa-universal-access"
+                            aria-hidden="true"></i>
+                        Evenement Culturelle</p>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            <div class="card" *ngFor="let i of ev" style="width: 18rem;">
+                                <div *ngIf="i.type==2">
+                                    <img class="card-img-top"
+                                        src="https://top-communication.com/wp-content/uploads/2019/06/concert-1280x640.jpg"
+                                        alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ i.title }} </h5>
+                                        <p class="card-text">{{ i.description }} </p>
+                                        <span class="badge badge-success">{{ i.date | date:'shortTime' }}</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm ">
+
+                </div>
+                <div class="col-sm border">
+                    <p class=" text-left font-italic font-weight-bold"><i class="fa fa-bicycle" aria-hidden="true"></i>
+                        Evenement sportifs</p>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            <div class="card" *ngFor="let i of ev" style="width: 18rem;">
+                                <div *ngIf="i.type==1">
+                                    <img class="card-img-top"
+                                        src="https://top-communication.com/wp-content/uploads/2019/06/concert-1280x640.jpg"
+                                        alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ i.title }} </h5>
+                                        <p class="card-text">{{ i.description }} </p>
+                                        <span class="badge badge-success">{{ i.date | date:'shortTime' }}</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control mt-2 mb-2" placeholder="Titre" [(ngModel)]="title">
+                    <small id="emailHelp" class="form-text text-muted">Type Evenement</small>
+
+                    <select [(ngModel)]="type" class="form-control mt-2 mb-2">
+                        <option *ngFor="let x of typseSpc" value="{{ x.id }}">{{ x.name }}</option>
+                    </select>
+
+                    <input [(ngModel)]="desc" type="text" class="form-control mt-2 mb-2" placeholder="Description">
+                    <input [(ngModel)]="date" type="datetime-local" class="form-control mt-2 mb-2">
+                    <input [(ngModel)]="photos" type="file" class="form-control mt-2 mb-2">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" (click)="ajouter()" data-bs-dismiss="modal" class="btn btn-primary">Save
+                        changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
